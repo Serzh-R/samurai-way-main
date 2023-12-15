@@ -15,6 +15,6 @@ const StyledHeader = styled.header`
     grid-area: h;
     background-color: greenyellow;
     img{
-        width: 20px;
+        width: 50px;
     }
 `
