@@ -1,14 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 
 export const Profile = () => {
     return (
-        <StyledProfile>
-            <img src="https://cdn.pixabay.com/photo/2023/10/11/11/42/coast-8308438_1280.jpg" alt="main-image"/>
+        <div className={'content'}>
+            <div>
+                <img src="https://cdn.pixabay.com/photo/2023/10/11/11/42/coast-8308438_1280.jpg" alt="main-image"/>
+            </div>
+
             <div>
                 <img src="https://tdzoo.ru/_mod_files/ce_images/articles/dsc_3421a_0.jpg" alt="avatar"/>
                 <p></p>
             </div>
+
             <div>
                 My posts
                 <div>
@@ -23,14 +26,7 @@ export const Profile = () => {
                     post 2
                 </div>
             </div>
-        </StyledProfile>
+        </div>
     );
 };
 
-const StyledProfile = styled.div`
-    grid-area: c;
-    background-color: crimson;
-    div img{
-        width: 100px;
-    }
-`
