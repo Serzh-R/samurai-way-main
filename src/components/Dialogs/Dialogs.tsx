@@ -1,44 +1,49 @@
 import React from 'react';
 import s from './Dialogs.module.css'
-import {NavLink} from 'react-router-dom';
+import {DialogItem} from './DialogItem/DialogItem';
+import {Message} from './Message/Message';
+
 
 export const Dialogs = () => {
+
+    const dialogs = [
+        {id: 1, name: 'Dimych'},
+        {id: 2, name: 'Andrey'},
+        {id: 3, name: 'Sveta'},
+        {id: 4, name: 'Sasha'},
+        {id: 5, name: 'Victor'},
+        {id: 6, name: 'Valera'},
+    ]
+
+    const messages = [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How is your it-kamasutra'},
+        {id: 3, message: 'Yo'},
+        {id: 4, message: 'No'},
+        {id: 5, message: 'Yo'},
+        {id: 6, message: 'Yo'},
+
+    ]
+
+    const dialogsElements = dialogs
+        .map(d => <DialogItem name={d.name} id={d.id}/>)
+
+    const messagesElements = messages
+        .map(m => <Message message={m.message}/>)
+
     return (
         <div className={s.dialogs}>
+
             <div className={s.dialogsItems}>
-                <DialogItem name={'Dimych'} id={1}/>
-                <DialogItem name={'Andrey'} id={2}/>
-                <DialogItem name={'Sveta'} id={3}/>
-                <DialogItem name={'Sasha'} id={4}/>
-                <DialogItem name={'Victor'} id={5}/>
-                <DialogItem name={'Valera'} id={6}/>
+                {dialogsElements}
             </div>
+
             <div className={s.messages}>
-                <Message message={"Hi"}/>
-                <Message message={"How is your it-kamasutra"}/>
-                <Message message={"Yo"}/>
+                {messagesElements}
             </div>
+
         </div>
     );
 };
 
-type DialogItemProps = {
-    name: string
-    id: number
-}
-const DialogItem = (props: DialogItemProps) => {
-    let path = "/dialogs/" + props.id
-    return (
-        <div className={s.dialog + ' ' + s.active}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-type MessageType = {
-    message:string
-}
-const Message = (props:MessageType) => {
-    return <div className={s.message}>{props.message}</div>
-}
 
