@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from '../render';
+
 export type DialogsProps = {
     id: number;
     name: string;
@@ -11,11 +13,12 @@ export type MessagesProps = {
 export type PostsProps = {
     id: number
     message: string
-    likesCount: string
+    likesCount: number
 }
 
 export type ProfilePageProps = {
     posts: PostsProps[]
+    newPostText: string
 }
 
 export type DialogsPageProps = {
@@ -23,17 +26,19 @@ export type DialogsPageProps = {
     dialogs: DialogsProps[]
 }
 
-export type StateProps = {
+export type RootStateProps = {
     profilePage: ProfilePageProps
     dialogsPage: DialogsPageProps
+    sidebar: {}
 }
 
-export const state: StateProps = {
+export const state: RootStateProps = {
     profilePage: {
         posts: [
-            {id: 1, message: 'Hi, how are you?', likesCount: '12'},
-            {id: 2, message: 'It`s my first post', likesCount: '11'},
+            {id: 1, message: 'Hi, how are you?', likesCount: 12},
+            {id: 2, message: 'It`s my first post', likesCount: 11},
         ],
+        newPostText: ' ',
     },
     dialogsPage: {
         messages: [
@@ -54,4 +59,22 @@ export const state: StateProps = {
             {id: 6, name: 'Valera'},
         ],
     },
+    sidebar: {},
+}
+
+export const addPost = () => {
+
+    let newPost: PostsProps = {
+        id: new Date().getTime(),
+        message: state.profilePage.newPostText,
+        likesCount: 0,
+    }
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
 }
