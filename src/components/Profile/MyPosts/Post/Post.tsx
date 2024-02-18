@@ -12,7 +12,9 @@ export const Post = (props: PostPropsType) => {
         <div className={s.item}>
             <img
                 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIbVXKD4jehXtmLvVrvUlJf0oaW9gPk0YItbundagrBfveeCmKQNqVzzbYAZHcH0q4Pkw&usqp=CAU'/>
-            {props.message}
+
+            <div>{props.message}</div>
+
             <div>
                 <span>like </span>{props.likesCount}
             </div>

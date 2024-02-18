@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './Button.module.css'
 
 type ButtonProps = {
     name: string
@@ -11,7 +12,7 @@ export const Button = ({name, onClick}: ButtonProps) => {
     }
 
     return (
-        <button onClick={onClickHandler}>{name}</button>
+        <button className={s.button} onClick={onClickHandler}>{name}</button>
     );
 };
 
