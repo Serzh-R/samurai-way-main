@@ -1,3 +1,7 @@
+import {ProfileActionsType, profileReducer} from './profile-reducer';
+import {DialogsActionsType, dialogsReducer} from './dialogs-reducer';
+import {sidebarReducer} from './sidebar-reducer';
+
 export type DialogsProps = {
     id: number;
     name: string;
@@ -99,7 +103,14 @@ export const store: StoreProps = {
     },*/
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+        this._callSubscriber();
+
+       /* if (action.type === 'ADD-POST') {
             const newPost: PostsProps = {
                 id: new Date().getTime(),
                 message: action.postText,
@@ -111,6 +122,7 @@ export const store: StoreProps = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber();
+
         } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY'){
             this._state.dialogsPage.newMessageBody = action.newMessageBody
             this._callSubscriber();
@@ -119,49 +131,12 @@ export const store: StoreProps = {
             this._state.dialogsPage.newMessageBody = ''
             this._state.dialogsPage.messages.push({id: 7, message: body})
             this._callSubscriber();
-        }
+        }*/
     }
 }
 
-export type ActionsType =
-    AddPostActionType
-    | UpdateNewPostTextActionType
-    | UpdateNewMessageBodyActionType
-    | SendMessageActionType
+export type ActionsType = ProfileActionsType | DialogsActionsType
 
-type AddPostActionType = ReturnType<typeof addPostAC>
-
-export const addPostAC = (postText: string) =>{
-    return {
-        type: 'ADD-POST',
-        postText: postText
-    } as const
-}
-
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
-
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
-
-type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
-export const updateNewMessageBodyAC = (newMessageBody:string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        newMessageBody: newMessageBody
-    } as const
-}
-
-type SendMessageActionType = ReturnType<typeof sendMessageAC>
-export const sendMessageAC = () => {
-    return {
-        type: 'SEND-MESSAGE'
-
-    } as const
-}
 //window.store = store
 
 // ************************************************** //

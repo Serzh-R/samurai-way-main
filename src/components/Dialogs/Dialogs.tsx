@@ -2,8 +2,9 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {ActionsType, DialogsPageProps, sendMessageAC, updateNewMessageBodyAC} from '../../redux/State';
+import {ActionsType, DialogsPageProps} from '../../redux/State';
 import {Button} from '../../elements/Button/Button';
+import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogs-reducer';
 
 
 type DialogsPropsType={
@@ -20,8 +21,11 @@ export const Dialogs = (props:DialogsPropsType) => {
 
     const newMessageBody = props.state.newMessageBody
 
+
     const onSendMessageClick = () => {
-        props.dispatch(sendMessageAC())
+        // Передайте необходимые аргументы (id и message) в sendMessageAC
+        const id = 7; // Примерный id, который вы используете в dispatch
+        props.dispatch(sendMessageAC(id, newMessageBody)); // Передаем id и новое сообщение
     }
 
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
