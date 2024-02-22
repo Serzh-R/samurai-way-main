@@ -76,7 +76,7 @@ export const store: StoreProps = {
         sidebar: {},
     },
     _callSubscriber() {
-        //console.log('state change')
+
     },
 
     getState() {
